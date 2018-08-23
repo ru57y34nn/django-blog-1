@@ -2,8 +2,19 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template import loader
 from myblog.models import Post
+from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
 
 
+# class BlogIndex(ListView):
+#     template_name = 'list.html'
+#     context_object_name = 'posts'
+#     queryset = Post.objects.exclude(published_date__exact=None).order_by('-published_date')
+    # model = Post
+
+
+
+#@login_required
 def list_view(request):
     published = Post.objects.exclude(published_date__exact=None)
     posts = published.order_by('-published_date')
